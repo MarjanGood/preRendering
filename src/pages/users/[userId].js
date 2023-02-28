@@ -3,7 +3,7 @@ function UserDetail({data}) {
     <div>
         UserDetail
         <h1>
-{data.name}
+        {data.name}
         </h1>
         <h3>
             {data.email}
