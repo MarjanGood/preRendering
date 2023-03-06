@@ -1,12 +1,20 @@
+import {useRouter} from "next/router"
+
 function UserDetail({data}) {
+
+    const router = useRouter();
+    if(router.isFallback){
+        return <h2>Fallback page!</h2>
+    }
+
     return ( 
     <div>
         UserDetail
         <h1>
-        {data.name}
+           {data.name}
         </h1>
         <h3>
-            {data.email}
+           {data.email}
         </h3>
     </div> 
     );
@@ -18,7 +26,9 @@ export async function getStaticPaths(){
 
     const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
     const data = await res.json();
-    const paths = data.map(user=>({ params: {userId: user.id.toString()} } ));
+    const usersData = data.slice(0,4);
+
+    const paths = usersData.map(user=>({ params: {userId: user.id.toString()} } ));
 
     return{
 
@@ -34,11 +44,11 @@ export async function getStaticPaths(){
         //     {params:{userId:"9"}},
         //     {params:{userId:"10"}},
         // ],
-
         //paths : paths,
-
         paths,
-        fallback:false
+        //fallback:false
+        fallback:true
+
     }
 }
 
@@ -48,6 +58,12 @@ export async function getStaticProps(context){
     const {params} = context;
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`);
     const data = await res.json();
+
+    if(!data.name){
+        return {
+            notFound: true,
+        };
+    }
 
     console.log(params)
 
