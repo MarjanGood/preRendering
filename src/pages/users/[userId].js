@@ -1,11 +1,6 @@
-import {useRouter} from "next/router"
 
 function UserDetail({data}) {
 
-    const router = useRouter();
-    if(router.isFallback){
-        return <h2>Fallback page!</h2>
-    }
 
     return ( 
     <div>
@@ -47,7 +42,8 @@ export async function getStaticPaths(){
         //paths : paths,
         paths,
         //fallback:false
-        fallback:true
+        // fallback:true
+        fallback:"blocking"
 
     }
 }
