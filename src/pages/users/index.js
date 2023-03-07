@@ -1,6 +1,5 @@
 import Link from "next/link"
 function Users({data}) {
-
     return ( <div>
         <ul>
         {
@@ -13,16 +12,16 @@ function Users({data}) {
 export default Users;
 
 export async function getStaticProps(){
-   const res= await fetch(`https://jsonplaceholder.typicode.com/users`);
+   const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
    const data = await res.json();
 
-    console.log(data);
+   console.log("index page re validate");
 
     return {
 
-    props:{
-     data
-    }
+    props:{ data },
+    revalidate:15,
+   // redirect:{destination: "/"}
 
     }
 }

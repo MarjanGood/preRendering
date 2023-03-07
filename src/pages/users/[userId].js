@@ -1,7 +1,5 @@
 
 function UserDetail({data}) {
-
-
     return ( 
     <div>
         UserDetail
@@ -51,13 +49,15 @@ export async function getStaticPaths(){
 
 export async function getStaticProps(context){
 
+    console.log("Regenerating User Details Page")
     const {params} = context;
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`);
     const data = await res.json();
 
     if(!data.name){
         return {
-            notFound: true,
+            redirect:{destination:"/"}
+            //notFound: true,
         };
     }
 
@@ -65,6 +65,7 @@ export async function getStaticProps(context){
 
     return {
         props:{ data },
+        revalidate:10,
     }
 
 }
