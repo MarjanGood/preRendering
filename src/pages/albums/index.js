@@ -20,9 +20,12 @@ function Albums({albums}) {
 
 export default Albums;
 
-export async function getServerSideProps(){
-const res= await fetch("https://jsonplaceholder.typicode.com/albums");
-const data= await res.json();
+export async function getServerSideProps(context){
+
+const { params, req , res }= context;
+console.log("cookie", res);
+const response= await fetch("https://jsonplaceholder.typicode.com/albums");
+const data= await response.json();
 
 return {
 

@@ -12,7 +12,7 @@ function Users({data}) {
 export default Users;
 
 export async function getStaticProps(){
-   const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+   const res = await fetch(`http://localhost:3001/users`);
    const data = await res.json();
 
    console.log("index page re validate");

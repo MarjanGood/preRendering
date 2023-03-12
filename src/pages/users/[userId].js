@@ -1,23 +1,29 @@
 
 function UserDetail({data}) {
+
+    console.log({data});
+
     return ( 
     <div>
         UserDetail
         <h1>
-           {data.name}
+           {data.id}
         </h1>
         <h3>
            {data.email}
         </h3>
-    </div> 
+    </div>
     );
+
 }
 
 export default UserDetail;
 
 export async function getStaticPaths(){
 
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+    const res = await fetch(`http://localhost:3001/users`);
+  //  const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+
     const data = await res.json();
     const usersData = data.slice(0,4);
 
@@ -49,19 +55,23 @@ export async function getStaticPaths(){
 
 export async function getStaticProps(context){
 
-    console.log("Regenerating User Details Page")
+   // console.log("Regenerating User Details Page")
+
     const {params} = context;
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`);
+    const res = await fetch(`http://localhost:3001/users/${params.userId}`);
+ // const res = await fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`);
+    
+    console.log(res);
     const data = await res.json();
 
-    if(!data.name){
-        return {
-            redirect:{destination:"/"}
-            //notFound: true,
-        };
+    if(!data.id){
+       return {
+           redirect:{destination:"/"}
+       // notFound: true,
+       };
     }
 
-    console.log(params)
+    //console.log(params)
 
     return {
         props:{ data },
