@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect ,useState } from 'react'
 
 function Todos() {
@@ -10,7 +11,7 @@ function Todos() {
     },[])
 
     return ( <div>
-    {todos.length ? todos.map(t=><h3 key={t.id}>{t.title}</h3>) 
+    {todos ? todos.map(t=><Link href={`/todos/${t.id}`} key={t.id}> <h3>{t.title}</h3></Link>) 
     :<h1>Loading...</h1>}
     </div> );
 }

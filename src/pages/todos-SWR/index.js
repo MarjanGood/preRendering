@@ -7,12 +7,13 @@ function SWRTodos() {
 
     console.log({data,error})
     return ( <div>
-    {data ? data.map(t=><h3 key={t.id}>{t.title}</h3>) 
-    :<h1>Loading...</h1>}
+    {
+    data ? data.map(t=><h3 key={t.id}>{t.title}</h3>) 
+    :
+    <h1>Loading...</h1>
+    }
     </div> );
-
-
 
 }
 
-export default SWRTodos;
+export default SWRTodos; 
