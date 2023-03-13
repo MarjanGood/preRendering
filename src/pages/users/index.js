@@ -15,7 +15,7 @@ export async function getStaticProps(){
    const res = await fetch(`http://localhost:3001/users`);
    const data = await res.json();
 
-   console.log("index page re validate");
+   console.log("index page revalidate");
 
     return {
 
